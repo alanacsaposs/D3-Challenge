@@ -67,13 +67,27 @@ d3.csv("data.csv").then(function(data) {
     .attr("fill", "#ADD8E6")
     .attr("opacity", ".5");
 
+    // Step 5b: Create Circle Text
+    // ==============================
+    var circlesGroup = chartGroup.selectAll()
+    .data(data)
+    .enter()
+    .append("text")
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.healthcare))
+    .style("font-size", "12px")
+    .style("text-anchor", "middle")
+    .style("fill", "#000")
+    .style("alignment-baseline","central")
+    .text(d => (d.abbr));
+
     // Step 6: Initialize tool tip
     // ==============================
     var toolTip = d3.tip()
       .attr("class", "tooltip")
       .offset([80, -30])
       .html(function(d) {
-        return (`${d.abbr}<br>% of Population with Healthcare: ${d.healthcare}<br>% of Population in Poverty: ${d.poverty}<br>`);
+        return (`${d.state}<br>% of Population with Healthcare: ${d.healthcare}<br>% of Population in Poverty: ${d.poverty}<br>`);
       });
 
     // Step 7: Create tooltip in the chart
