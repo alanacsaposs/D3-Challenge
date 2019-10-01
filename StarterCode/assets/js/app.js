@@ -34,7 +34,7 @@ d3.csv("data.csv").then(function(data) {
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([6, d3.max(data, d => d.poverty) + 3])
+      .domain([8, d3.max(data, d => d.poverty) + 1])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
@@ -63,9 +63,9 @@ d3.csv("data.csv").then(function(data) {
     .append("circle")
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("r", "15")
-    .attr("fill", "#FFC0CBAA");
-    // .attr("opacity", ".5");
+    .attr("r", "12")
+    .attr("fill", "#ADD8E6")
+    .attr("opacity", ".5");
 
     // Step 6: Initialize tool tip
     // ==============================
@@ -73,7 +73,7 @@ d3.csv("data.csv").then(function(data) {
       .attr("class", "tooltip")
       .offset([80, -30])
       .html(function(d) {
-        return (`${d.state}<br>% of Population with Healthcare: ${d.healthcare}<br>% of Population in Poverty: ${d.poverty}<br>`);
+        return (`${d.abbr}<br>% of Population with Healthcare: ${d.healthcare}<br>% of Population in Poverty: ${d.poverty}<br>`);
       });
 
     // Step 7: Create tooltip in the chart
